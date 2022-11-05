@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">yakıt hesaplama</string>
+    <string name="yak_t_tipini_se_iniz">Yakıt Tipini Seçiniz</string>
+    <string name="dizel">Dizel</string>
+    <string name="benzin">Benzin</string>
+    <string name="lpg">LPG</string>
+</resources>
