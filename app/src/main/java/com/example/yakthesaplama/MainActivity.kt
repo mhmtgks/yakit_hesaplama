@@ -21,12 +21,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        saveData()
         getData()
 
         var x = 0.0f
         var mod = 1 //mod 1 hesapla mod 2 güncelle
-
+        var modb =1 //1 güncelleme menü acilis 2 geri anasayfa
        val rb1: RadioButton =findViewById(R.id.radioButton)
         val rb2: RadioButton =findViewById(R.id.radioButton2)
         val rb3 : RadioButton =findViewById(R.id.radioButton3)
@@ -41,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         val  txt5: TextView =findViewById(R.id.textView4)
         val  txt6: TextView =findViewById(R.id.textView5)
         val  txt7: TextView =findViewById(R.id.textView6)
+        txt2.setText("6.6")
+        txt1.setText("5.9")
+        txt3.setText("0")
         rb1.setOnCheckedChangeListener{ buttonView, isChecked ->
 
          x=dizel1
@@ -88,44 +90,61 @@ class MainActivity : AppCompatActivity() {
             rb3.visibility=View.VISIBLE
             txt0.visibility=View.VISIBLE
             btn1.setText("Hesapla")
-
             txt5.setText("Şehiriçi Yakıt Tüketimi")
             txt6.setText("Şehirlerarası Yakıt Tüketimi")
             txt7.setText("Gidilecek Km")
             dizel1=txt1.text.toString().toFloat()
             benzin1=txt2.text.toString().toFloat()
             lpg1=txt3.text.toString().toFloat()
-            txt1.setText("0")
-            txt2.setText("0")
-            txt3.setText("0")
-            btn2.visibility=View.VISIBLE
+            btn2.setText("Yakıt Fiyatı Güncelle")
             mod=1
+            modb=1
             saveData()
-
-
-
-
-
+            txt1.setText("5.9")
+            txt2.setText("6.6")
+            txt3.setText("0")
+            rb1.setChecked(false)
+            rb2.setChecked(false)
+            rb3.setChecked(false)
             }
 
 
         }
-        btn2.setOnClickListener{
-            rb1.visibility=View.INVISIBLE
-            rb2.visibility=View.INVISIBLE
-            rb3.visibility=View.INVISIBLE
-            btn2.visibility=View.INVISIBLE
-            txt0.visibility=View.INVISIBLE
-            btn1.setText("Güncelle")
-
-            txt5.setText("\nDizel Fiyat")
-            txt6.setText("\nBenzin Fiyat")
-            txt7.setText("Lpg fiyat")
-            getData()
-            txt1.setText(dizel1.toString())
-            txt2.setText(benzin1.toString())
-            txt3.setText(lpg1.toString())
-            mod=2
+        btn2.setOnClickListener{//sag ust
+            if(modb==1){
+                 rb1.visibility=View.INVISIBLE
+                 rb2.visibility=View.INVISIBLE
+                 rb3.visibility=View.INVISIBLE
+                 txt0.visibility=View.INVISIBLE
+                 btn1.setText("Güncelle")
+                 btn2.setText("geri")
+                 txt5.setText("\nDizel Fiyat")
+                 txt6.setText("\nBenzin Fiyat")
+                 txt7.setText("Lpg fiyat")
+                 getData()
+                 txt1.setText(dizel1.toString())
+                 txt2.setText(benzin1.toString())
+                 txt3.setText(lpg1.toString())
+                txt8.setText("")
+                txt9.setText("")
+                 mod=2
+                 modb=2}
+            else if(modb==2){
+                rb1.visibility=View.VISIBLE
+                rb2.visibility=View.VISIBLE
+                rb3.visibility=View.VISIBLE
+                txt0.visibility=View.VISIBLE
+                btn1.setText("Hesapla")
+                txt5.setText("Şehiriçi Yakıt Tüketimi")
+                txt6.setText("Şehirlerarası Yakıt Tüketimi")
+                txt7.setText("Gidilecek Km")
+                btn2.setText("Yakıt Fiyatı Güncelle")
+                txt1.setText("5.9")
+                txt2.setText("6.6")
+                txt3.setText("0")
+                mod=1
+                modb=1
+            }
         }
 
 
@@ -133,6 +152,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+  @SuppressLint("SuspiciousIndentation")
   fun saveData(){
       val sharedPref = getSharedPreferences("saveData", Context.MODE_PRIVATE)
       val editor:SharedPreferences.Editor = sharedPref.edit()
